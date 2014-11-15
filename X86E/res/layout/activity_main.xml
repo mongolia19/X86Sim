@@ -1,0 +1,818 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res/com.nine.viewpaperdemo"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#e8e8e8"
+    android:orientation="vertical"
+    android:paddingLeft="5dp" >
+
+    <!-- Dummy item to prevent edit text from receiving focus -->
+
+    <LinearLayout
+        android:layout_width="0px"
+        android:layout_height="0px"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <!-- Edit Text -->
+
+            <com.example.flatui.views.FlatEditText
+                android:id="@+id/title_edittexts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="Edit Texts"
+                android:textSize="20dip"
+                flatui:fl_textColor="main"
+                flatui:fl_theme="@array/grass" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dip"
+                android:orientation="vertical"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip" >
+
+                <com.example.flatui.views.FlatEditText
+                    android:id="@+id/edittext_flat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:gravity="center_vertical"
+                    android:hint="Flat"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/grass" />
+
+                <com.example.flatui.views.FlatEditText
+                    android:id="@+id/edittext_box"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:gravity="center_vertical"
+                    android:hint="Box"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    flatui:fl_fieldStyle="box"
+                    flatui:fl_theme="@array/grass" />
+
+                <com.example.flatui.views.FlatEditText
+                    android:id="@+id/edittext_transparentbox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:gravity="center_vertical"
+                    android:hint="Transparent box"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    flatui:fl_fieldStyle="transparent"
+                    flatui:fl_theme="@array/grass" />
+
+                <com.example.flatui.views.FlatEditText
+                    android:id="@+id/edittext_transparent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:gravity="center_vertical"
+                    android:hint="Transparent"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    flatui:fl_borderWidth="0dp"
+                    flatui:fl_fieldStyle="transparent"
+                    flatui:fl_theme="@array/grass" />
+            </LinearLayout>
+
+            <!-- Seek Bar -->
+
+            <com.example.flatui.views.FlatTextView
+                android:id="@+id/title_seekbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="20dip"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="Seek Bar"
+                android:textSize="20dip"
+                flatui:fl_textColor="main" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dip"
+                android:orientation="vertical"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip" >
+
+                <com.example.flatui.views.FlatSeekBar
+                    android:id="@+id/seekbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:max="100" />
+            </LinearLayout>
+
+            <!-- Button -->
+
+            <com.example.flatui.views.FlatTextView
+                android:id="@+id/title_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="20dip"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="Buttons"
+                android:textSize="20dip"
+                flatui:fl_textColor="main" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dip"
+                android:orientation="vertical"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip" >
+
+                <com.example.flatui.views.FlatTextView
+                    android:id="@+id/title_buttons_shape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="Shape"
+                    android:textSize="16dip"
+                    flatui:fl_textColor="main" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2" >
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_block"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:text="Block"
+                        flatui:fl_blockButtonEffectHeight="3dp"
+                        flatui:fl_textAppearance="light" />
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_flat"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:text="Full Flat"
+                        flatui:fl_textAppearance="light" />
+                </LinearLayout>
+
+                <com.example.flatui.views.FlatTextView
+                    android:id="@+id/title_buttons_text_appearance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="Text Appearance"
+                    android:textSize="16dip"
+                    flatui:fl_textColor="main" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="3" >
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_light"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:text="Light"
+                        flatui:fl_textAppearance="light" />
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_white"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:text="White" />
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_dark_text"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:text="Dark"
+                        flatui:fl_textAppearance="dark" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- CheckBox -->
+
+            <com.example.flatui.views.FlatTextView
+                android:id="@+id/title_checkbox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="Check Box"
+                android:textSize="20dip"
+                flatui:fl_textColor="main" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:weightSum="2" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <com.example.flatui.views.FlatTextView
+                        android:id="@+id/title_checkbox_enabled"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:gravity="center_vertical"
+                        android:text="Enabled"
+                        android:textSize="16dip"
+                        flatui:fl_textColor="main" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dip"
+                        android:orientation="vertical" >
+
+                        <com.example.flatui.views.FlatCheckBox
+                            android:id="@+id/checkbox_unchecked_enabled"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="5dip"
+                            android:background="#0000"
+                            android:text="unchecked"
+                            flatui:fl_size="20dip" />
+
+                        <com.example.flatui.views.FlatCheckBox
+                            android:id="@+id/checkbox_checked_enabled"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="5dip"
+                            android:background="#0000"
+                            android:checked="true"
+                            android:text="checked"
+                            flatui:fl_size="20dip" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <com.example.flatui.views.FlatTextView
+                        android:id="@+id/title_checkbox_disabled"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:gravity="center_vertical"
+                        android:text="Disabled"
+                        android:textSize="16dip"
+                        flatui:fl_textColor="main" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dip"
+                        android:orientation="vertical" >
+
+                        <com.example.flatui.views.FlatCheckBox
+                            android:id="@+id/checkbox_unchecked_disabled"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="5dip"
+                            android:background="#0000"
+                            android:enabled="false"
+                            android:text="unchecked"
+                            flatui:fl_size="20dip" />
+
+                        <com.example.flatui.views.FlatCheckBox
+                            android:id="@+id/checkbox_checked_disabled"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_margin="5dip"
+                            android:background="#0000"
+                            android:checked="true"
+                            android:enabled="false"
+                            android:text="checked"
+                            flatui:fl_size="20dip" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- RadioButton -->
+
+            <com.example.flatui.views.FlatTextView
+                android:id="@+id/title_radiobutton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="Radio Button"
+                android:textSize="20dip"
+                flatui:fl_textColor="main" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:weightSum="2" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <com.example.flatui.views.FlatTextView
+                        android:id="@+id/title_radiobutton_enabled"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:gravity="center_vertical"
+                        android:text="Enabled"
+                        android:textSize="16dip"
+                        flatui:fl_textColor="main" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dip" >
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left" >
+
+                            <com.example.flatui.views.FlatRadioButton
+                                android:id="@+id/radio_unchecked_enabled"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dip"
+                                android:background="#0000"
+                                android:text="unchecked"
+                                flatui:fl_dotMargin="1dp"
+                                flatui:fl_size="20dip" />
+
+                            <com.example.flatui.views.FlatRadioButton
+                                android:id="@+id/radio_checked_enabled"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dip"
+                                android:background="#0000"
+                                android:text="checked"
+                                flatui:fl_dotMargin="1dp"
+                                flatui:fl_size="20dip" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <com.example.flatui.views.FlatTextView
+                        android:id="@+id/title_radiobutton_disabled"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:gravity="center_vertical"
+                        android:text="Disabled"
+                        android:textSize="16dip"
+                        flatui:fl_textColor="main" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dip" >
+
+                        <RadioGroup
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="left" >
+
+                            <com.example.flatui.views.FlatRadioButton
+                                android:id="@+id/radio_unchecked_disabled"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dip"
+                                android:background="#0000"
+                                android:enabled="false"
+                                android:text="unchecked"
+                                flatui:fl_dotMargin="1dp"
+                                flatui:fl_size="20dip" />
+
+                            <com.example.flatui.views.FlatRadioButton
+                                android:id="@+id/radio_checked_disabled"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_margin="5dip"
+                                android:background="#0000"
+                                android:checked="true"
+                                android:enabled="false"
+                                android:text="checked"
+                                flatui:fl_dotMargin="1dp"
+                                flatui:fl_size="20dip" />
+                        </RadioGroup>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Toggle Button -->
+
+            <com.example.flatui.views.FlatTextView
+                android:id="@+id/title_toggle_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="10dip"
+                android:gravity="center_vertical"
+                android:maxLines="1"
+                android:text="Toggle Button"
+                android:textSize="20dip"
+                flatui:fl_textColor="main" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dip"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:weightSum="2" >
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <com.example.flatui.views.FlatTextView
+                        android:id="@+id/title_toggle_enabled"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:gravity="center_vertical"
+                        android:text="Enabled"
+                        android:textSize="16dip"
+                        flatui:fl_textColor="main" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dip"
+                        android:orientation="vertical" >
+
+                        <com.example.flatui.views.FlatToggleButton
+                            android:id="@+id/toggle_unchecked_enabled"
+                            android:layout_width="72dp"
+                            android:layout_height="36dp"
+                            android:text="Full Flat"
+                            flatui:fl_cornerRadius="18dp"
+                            flatui:fl_space="14dp" />
+
+                        <com.example.flatui.views.FlatToggleButton
+                            android:id="@+id/toggle_checked_enabled"
+                            android:layout_width="72dp"
+                            android:layout_height="36dp"
+                            android:checked="true"
+                            android:text="Full Flat"
+                            flatui:fl_cornerRadius="18dp"
+                            flatui:fl_space="14dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical" >
+
+                    <com.example.flatui.views.FlatTextView
+                        android:id="@+id/title_toggle_disabled"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dip"
+                        android:gravity="center_vertical"
+                        android:text="Disabled"
+                        android:textSize="16dip"
+                        flatui:fl_textColor="main" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dip"
+                        android:orientation="vertical" >
+
+                        <com.example.flatui.views.FlatToggleButton
+                            android:id="@+id/toggle_unchecked_disabled"
+                            android:layout_width="72dp"
+                            android:layout_height="36dp"
+                            android:enabled="false"
+                            android:text="Full Flat"
+                            flatui:fl_cornerRadius="18dp"
+                            flatui:fl_space="14dp" />
+
+                        <com.example.flatui.views.FlatToggleButton
+                            android:id="@+id/toggle_checked_disabled"
+                            android:layout_width="72dp"
+                            android:layout_height="36dp"
+                            android:checked="true"
+                            android:enabled="false"
+                            android:text="Full Flat"
+                            flatui:fl_cornerRadius="18dp"
+                            flatui:fl_space="14dp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Themes -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dip"
+                android:layout_marginTop="20dip" >
+
+                <com.example.flatui.views.FlatTextView
+                    android:id="@+id/title_themes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="Themes"
+                    android:textSize="20dip"
+                    flatui:fl_textColor="main" />
+
+                <com.example.flatui.views.FlatTextView
+                    android:id="@+id/title_themes_note"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="Press buttons to change theme."
+                    android:textSize="12dip"
+                    flatui:fl_textColor="light" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dip"
+                android:orientation="vertical"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2" >
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_sand"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Sand"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/sand" />
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_orange"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Orange"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/orange" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2" >
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_candy"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Candy"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/candy" />
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_blossom"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Blossom"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/blossom" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2" >
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_grape"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Grape"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/grape" />
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_deep"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Deep"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/deep" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2" >
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_sky"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Sky"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/sky" />
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_grass"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Grass"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/grass" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2" >
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_dark"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Dark"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/dark" />
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_snow"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Snow"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/snow" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2" >
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_sea"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Sea"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/sea" />
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_turquoise"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Blood"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/blood" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="2" >
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_custom_theme_1"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Custom 1"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/custom_theme_1" />
+
+                    <com.example.flatui.views.FlatButton
+                        android:id="@+id/button_custom_theme_2"
+                        android:layout_width="0dp"
+                        android:layout_height="45dp"
+                        android:layout_margin="3dp"
+                        android:layout_weight="1"
+                        android:onClick="onChangeThemeButtonClicked"
+                        android:text="Custom 2"
+                        flatui:fl_textAppearance="light"
+                        flatui:fl_theme="@array/custom_theme_2" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

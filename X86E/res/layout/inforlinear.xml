@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:flatui="http://schemas.android.com/apk/res/com.nine.viewpaperdemo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@android:color/white"
+    >
+    <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="1">
+   
+    <ImageView 
+         android:id="@+id/photo_image_view"
+         
+         
+         
+         android:layout_width="fill_parent"
+         android:layout_height="0dp"
+         android:layout_weight="4"
+         android:src="@drawable/app"
+         />           
+</LinearLayout>
+
+
+  <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="wrap_content"   
+    android:orientation="horizontal" 
+    android:layout_weight="1"> 
+  <LinearLayout  
+    android:layout_width="0dp"   
+    android:layout_height="fill_parent"   
+    android:orientation="vertical" 
+    android:layout_weight="1">
+     <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    
+                    android:layout_weight="1"
+                    android:hint="14/5\n   -\n14/7"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/blood" />
+      
+    </LinearLayout>   
+    <LinearLayout  
+    android:layout_width="0dp"   
+    android:layout_height="fill_parent"   
+    android:orientation="vertical" 
+    android:layout_weight="0.05">   
+  </LinearLayout>
+ <LinearLayout  
+    android:layout_width="0dp"   
+    android:layout_height="match_parent"   
+    android:orientation="vertical" 
+    android:layout_weight="4">   
+
+    <com.example.flatui.views.FlatEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:editable="false"
+        android:hint="Android/iOS跨平台应用 乾隆花园导览"
+        android:includeFontPadding="true"
+        android:maxLines="1"
+        android:textSize="12sp"
+        flatui:fl_fieldStyle="flat"
+        flatui:fl_theme="@array/blossom" />
+
+     <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+
+   <com.example.flatui.views.FlatEditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="5"
+       android:editable="false"
+       android:hint="项目描述：该项目主要面向首都博物馆，目的是为游客提供基于移动设备平台的导游讲解服务.用户可以随意浏览博物馆展品并收藏；观看展品图片；聆听展品解说."
+       android:includeFontPadding="true"
+       android:maxLines="5"
+       android:textSize="12sp"
+       flatui:fl_fieldStyle="flat"
+       flatui:fl_theme="@array/sky" />
+
+   <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+
+      <com.example.flatui.views.FlatEditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="4"
+          android:editable="false"
+          android:hint="责任描述：1.负责需求分析，完成应用架构搭建2. 分配系统设计任务，功能模块划分与任务分配3.项目进度管理与团队内部协调4.代码检查与版本管理。
+其他负责工作还包括Android端应用各功能模块的编码实现、测试与Bug修复；iOS端重要模块调试与Bug修复等。"
+          android:includeFontPadding="true"
+          android:maxLines="10"
+          android:textSize="10sp"
+          flatui:fl_fieldStyle="flat"
+          flatui:fl_theme="@array/sea" />
+
+      <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+
+      <com.example.flatui.views.FlatEditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="2"
+          android:editable="false"
+          android:hint="成果：应用在首都博物馆展览--“长宜茀禄：乾隆花园的秘密”中使用，有效地减轻解说人员工作强度：每日解说人次由7-8人次/天降低至4-5次人次/每天，获得首都博物馆方面的肯定与称赞，并希望在以后的展览中继续保持合作。"
+          android:includeFontPadding="true"
+          android:maxLines="10"
+          android:textSize="10sp"
+          flatui:fl_fieldStyle="flat"
+          flatui:fl_theme="@array/grass" />
+        
+</LinearLayout>
+</LinearLayout>
+
+</LinearLayout>

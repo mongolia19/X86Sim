@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:flatui="http://schemas.android.com/apk/res/com.nine.viewpaperdemo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@android:color/white"
+    >
+    <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="1">
+   
+    <ImageView 
+         
+        
+         
+         
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_weight="4"
+         android:src="@drawable/position"
+         />           
+</LinearLayout>
+
+
+  <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="wrap_content"   
+    android:orientation="horizontal" 
+    android:layout_weight="1"> 
+  <LinearLayout  
+    android:layout_width="0dp"   
+    android:layout_height="fill_parent"   
+    android:orientation="vertical" 
+    android:layout_weight="1">
+     <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    
+                    android:layout_weight="1"
+                    android:hint="14/5\n   -\n14/7"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/blood" />
+      
+    </LinearLayout>   
+    <LinearLayout  
+    android:layout_width="0dp"   
+    android:layout_height="fill_parent"   
+    android:orientation="vertical" 
+    android:layout_weight="0.05">   
+  </LinearLayout>
+ <LinearLayout  
+    android:layout_width="0dp"   
+    android:layout_height="match_parent"   
+    android:orientation="vertical" 
+    android:layout_weight="4">   
+
+    <com.example.flatui.views.FlatEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:editable="false"
+        android:hint="地下金属矿开采智能设备的精确定位导航"
+        android:includeFontPadding="true"
+        android:maxLines="1"
+        android:textSize="12sp"
+        flatui:fl_fieldStyle="flat"
+        flatui:fl_theme="@array/blossom" />
+
+     <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+
+   <com.example.flatui.views.FlatEditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="5"
+       android:editable="false"
+       android:hint="课题描述：该课题为国家863重点课题，课题的目的是为地下智能矿用设备提供精确定位导航。负责激光定位导航基站原型机的设计与实现。"
+       android:includeFontPadding="true"
+       android:maxLines="5"
+       android:textSize="12sp"
+       flatui:fl_fieldStyle="flat"
+       flatui:fl_theme="@array/sky" />
+
+   <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+
+      <com.example.flatui.views.FlatEditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="4"
+          android:editable="false"
+          android:hint="承担工作：
+1.基站本体结构设计（机械设计）
+2.基站电子电路设计（嵌入式硬件原理图设计 PCB板设计）
+3.基站控制程序设计（DSP、单片机的C语言程序设计）"
+          android:includeFontPadding="true"
+          android:maxLines="10"
+          android:textSize="10sp"
+          flatui:fl_fieldStyle="flat"
+          flatui:fl_theme="@array/sea" />
+
+      <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+
+      <com.example.flatui.views.FlatEditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="2"
+          android:editable="false"
+          android:hint="成果：经工业现场测试验证，系统在40m内，定位误差可达10cm以内"
+          android:includeFontPadding="true"
+          android:maxLines="10"
+          android:textSize="10sp"
+          flatui:fl_fieldStyle="flat"
+          flatui:fl_theme="@array/grass" />
+        
+</LinearLayout>
+</LinearLayout>
+
+</LinearLayout>

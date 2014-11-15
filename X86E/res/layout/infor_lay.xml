@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flatui="http://schemas.android.com/apk/res/com.nine.viewpaperdemo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+     <com.example.flatui.views.FlatEditText
+                    android:id="@+id/infor_edittext_flat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    android:gravity="center_vertical"
+                    android:hint="Information"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/grass" />
+     <ImageView 
+         android:id="@+id/photo_image_view"
+         android:layout_margin="5dip"
+         android:layout_below="@id/infor_edittext_flat"
+         android:layout_alignParentRight="true"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:src="@drawable/person_photo_s"
+         />           
+       <com.example.flatui.views.FlatEditText
+                    android:id="@+id/infor_edittext_flat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dip"
+                    
+                    android:hint="Information"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/grass" />
+               
+                
+                
+
+</RelativeLayout>

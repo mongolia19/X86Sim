@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:flatui="http://schemas.android.com/apk/res/com.nine.viewpaperdemo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@android:color/white"
+    >
+    <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="1">
+   
+  <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="fill_parent"   
+    android:orientation="horizontal" 
+    android:layout_weight="1"> 
+  <LinearLayout  
+    android:layout_width="0dp"   
+    android:layout_height="fill_parent"   
+    android:orientation="vertical" 
+    android:layout_weight="2">   
+    <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="1"
+                    android:hint="毕业学校 北京科技大学"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/blossom" />
+     <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+   <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="3"
+                    android:hint="硕士专业 汽车电子"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/sky" />
+   <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+      <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="3"
+                    android:hint="研究方向 嵌入式系统"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/sea" />
+      <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+      <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="2"
+                    android:hint="本科双学位\n车辆工程\n数学与应用数学"
+                    android:includeFontPadding="true"
+                    android:maxLines="3"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/grass" />
+        
+</LinearLayout>
+    
+  <LinearLayout
+     android:layout_width="0dp"
+     android:layout_height="fill_parent"
+     android:layout_weight="0.05"
+     android:orientation="vertical" >
+ </LinearLayout>
+ <LinearLayout  
+    android:layout_width="0dp"   
+    android:layout_height="fill_parent"   
+    android:orientation="vertical" 
+    android:layout_weight="1">
+   <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="wrap_content"   
+    android:orientation="vertical" 
+    android:layout_weight="4">
+    <ImageView 
+         android:id="@+id/photo_image_view"
+         
+         
+         
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_weight="4"
+         android:src="@drawable/person_photo"
+         />
+    </LinearLayout>   
+      <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="1"
+                    android:hint=" 暴宇健"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/sea" />
+      <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+      <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="1"
+                    android:hint="男"
+                    android:includeFontPadding="true"
+                    android:maxLines="10"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/grass" />
+        
+</LinearLayout>
+
+</LinearLayout>
+</LinearLayout>
+ <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.01">
+  </LinearLayout>
+
+  <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="horizontal" 
+    android:layout_weight="1">
+ <LinearLayout  
+    android:layout_width="0dp"   
+    android:layout_height="fill_parent"   
+    android:orientation="vertical" 
+    android:layout_weight="4">   
+    
+    <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="1"
+                    android:hint="应聘职位 嵌入式软件工程师"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/blossom" />
+     <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+   <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="5"
+                    android:hint="电子邮箱 mongolia19@gmail.com"
+                    android:includeFontPadding="true"
+                    android:maxLines="10"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/sky" />
+   <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+      <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="4"
+                    android:hint="Tel 15010432448"
+                    android:includeFontPadding="true"
+                    android:maxLines="10"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/sea" />
+      <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+      <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="2"
+                    android:hint="QQ 875992604"
+                    android:includeFontPadding="true"
+                    android:maxLines="10"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/grass" />
+        
+</LinearLayout>
+</LinearLayout>
+
+</LinearLayout>

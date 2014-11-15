@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:flatui="http://schemas.android.com/apk/res/com.nine.viewpaperdemo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@android:color/white"
+    >
+
+  <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="horizontal" 
+    android:layout_weight="1">
+ <LinearLayout  
+    android:layout_width="0dp"   
+    android:layout_height="fill_parent"   
+    android:orientation="vertical" 
+    android:layout_weight="4">   
+    
+    <com.example.flatui.views.FlatEditText
+                    
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    
+                    android:layout_weight="1"
+                    android:hint="自我评价"
+                    android:includeFontPadding="true"
+                    android:maxLines="1"
+                    android:editable="false"
+                    flatui:fl_fieldStyle="flat"
+                    flatui:fl_theme="@array/blossom" />
+     <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+
+   <com.example.flatui.views.FlatEditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="4"
+       android:editable="false"
+       android:hint="1、学习能力突出，是全校少有的数学专业第二学位获得者（2012届仅5人获此学位），同时也是车辆工程系罕见的能于入学第一学期进入国家863课题组并从事实际工作的硕士研究生。"
+       android:includeFontPadding="true"
+       android:maxLines="10"
+       android:textSize="12sp"
+       flatui:fl_fieldStyle="flat"
+       flatui:fl_theme="@array/sky" />
+
+    <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>  
+
+   <com.example.flatui.views.FlatEditText
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_weight="4"
+       android:editable="false"
+       android:hint="2、编程经验丰富，善于解决实际问题，从本科三年级开始在校属实验室从事应用开放工作，熟悉多种编程语言和开发平台；同时熟知问题排查流程与方法，善于分析和解决实际问题。"
+       android:includeFontPadding="true"
+       android:maxLines="10"
+       android:textSize="12sp"
+       flatui:fl_fieldStyle="flat"
+       flatui:fl_theme="@array/sky" />
+
+   <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+
+      <com.example.flatui.views.FlatEditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="4"
+          android:editable="false"
+          android:hint="3、有团队合作与领导经验，能合理确定目标和分配任务，同时善于协调进度和激励成员。在本校应用开发团队任负责人期间成功带领团队为首都博物馆开发跨平台应用，并获得需方好评。"
+          android:includeFontPadding="true"
+          android:maxLines="10"
+          android:textSize="12sp"
+          flatui:fl_fieldStyle="flat"
+          flatui:fl_theme="@array/sea" />
+
+      <LinearLayout  
+    android:layout_width="fill_parent"   
+    android:layout_height="0dp"   
+    android:orientation="vertical" 
+    android:layout_weight="0.1">
+    </LinearLayout>   
+
+      <com.example.flatui.views.FlatEditText
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_weight="4"
+          android:editable="false"
+          android:hint="4、酷爱技术，视野开阔，对数学、物理、人工智能、机器学习、编译器等领域有浓厚兴趣，经常阅读相关论文，并对感兴趣的算法加以实现。"
+          android:includeFontPadding="true"
+          android:maxLines="10"
+          android:textSize="12sp"
+          flatui:fl_fieldStyle="flat"
+          flatui:fl_theme="@array/grass" />
+        
+</LinearLayout>
+</LinearLayout>
+
+</LinearLayout>
