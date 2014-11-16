@@ -116,13 +116,16 @@ private static int get_ea_val_16(CPU_STATE_S cpu) {
 	int disp8 = cpu.mp.mp[2];
 
 	
-	int val=0;
 	
 	
-	switch (key) {
-	case value:
+	
+	switch (cpu.modrm(CPU_STATE_S.GetBit,CPU_STATE_S.mod)){
+	case 0x00:
+	case 0x01:
+	case 0x02:
+	{
 		
-		break;
+	}
 
 	default:
 		break;
