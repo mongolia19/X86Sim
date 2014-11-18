@@ -76,7 +76,7 @@ public class VideoPlayTestActivity extends Activity{
 		// 设置需要播放的视频
 		try
 		{
-			mPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.nine.viewpaperdemo/"+R.raw.laserdemo));
+			mPlayer.setDataSource(getApplicationContext(), Uri.parse("android.resource://com.nine.viewpaperdemo/"));
 			//mPlayer.setDataSource(videoFileLocation);
 			
 		}

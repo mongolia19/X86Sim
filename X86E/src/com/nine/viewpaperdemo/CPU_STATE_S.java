@@ -2,8 +2,8 @@ package com.nine.viewpaperdemo;
 
 public class CPU_STATE_S 
 {
-	public static final int SET_BIT=1;
-	public static final int CLEAR_BIT=0;
+	public static final boolean SET_BIT=true;
+	public static final boolean CLEAR_BIT=false;
 	
 	
 	public static final int CF=0; // carry flag - set if there was a carry from or borrow to the most significant bit during the last result calculation
@@ -41,10 +41,10 @@ public class CPU_STATE_S
 		
 	
 	int flags;
-	public void flags(int SetOrClear,int bit)
+	public void flags(boolean SetOrNot,int bit)
 	{
 		int Mask=0;
-		if(SetOrClear==0)
+		if(SetOrNot)
 		{
 			Mask=~(1<<bit);
 			this.flags&=Mask;
