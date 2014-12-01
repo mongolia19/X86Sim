@@ -65,6 +65,51 @@ public static void set_flag_log_byte(CPU_STATE_S cpu, int v1) {
 	cpu.flags(CPU_STATE_S.CLEAR_BIT, CPU_STATE_S.OF);
 	
 }
+public static void set_flag_sbb_word(CPU_STATE_S cpu, int v1, int v2,
+		int v3) 
+{
+	// o..szapc 	
+		int dst = v1 - v2 - v3;
+
+		set_psz_flags_word( cpu, v1 - v2 - v3 );
+		cpu.flags(( ( dst & 0xffff0000 ) != 0 ),CPU_STATE_S.CF);
+		cpu.flags((( ( v1 ^ dst ) & ( v1 ^ v2 ) & 0x8000 ) != 0),CPU_STATE_S.OF);
+		cpu.flags((( ( v1 ^ v2 ^ dst ) & 0x10 ) != 0),CPU_STATE_S.AF);
+		//cpu->flags.bit.CF = ( ( dst & 0xffff0000 ) != 0 );
+		//cpu->flags.bit.OF = ( ( v1 ^ dst ) & ( v1 ^ v2 ) & 0x8000 ) != 0;
+		//cpu->flags.bit.AF = ( ( v1 ^ v2 ^ dst ) & 0x10 ) != 0;
+	
+}
+public static void set_flag_sub_word(CPU_STATE_S cpu, int v1, int v2) {
+	
+	// oszapc
+		int dst = v1 - v2;
+
+		set_psz_flags_word( cpu, v1 - v2 );
+		
+		cpu.flags(( ( dst & 0xffff0000 ) != 0 ),CPU_STATE_S.CF);
+		cpu.flags(( ( ( v1 ^ dst ) & ( v1 ^ v2 ) & 0x8000 ) != 0 ),CPU_STATE_S.OF);
+		cpu.flags(( ( ( v1 ^ v2 ^ dst ) & 0x10 ) != 0 ),CPU_STATE_S.AF);
+		
+		//cpu->flags.bit.CF = ( ( dst & 0xffff0000 ) != 0 );
+		//cpu->flags.bit.OF = ( ( ( v1 ^ dst ) & ( v1 ^ v2 ) & 0x8000 ) != 0 );
+		//cpu->flags.bit.AF = ( ( ( v1 ^ v2 ^ dst ) & 0x10 ) != 0 );
+}
+public static void set_flag_sub_byte(CPU_STATE_S cpu, int v1, int v2) {
+	int dst = v1 - v2;
+	
+	set_psz_flags_byte(cpu, v1 - v2 );
+	
+	cpu.flags(( ( dst & 0xff00) != 0 ),CPU_STATE_S.CF);
+	cpu.flags(( ( ( v1 ^ dst ) & ( v1 ^ v2 ) & 0x80 ) != 0 ),CPU_STATE_S.OF);
+	cpu.flags( ( ( ( v1 ^ v2 ^ dst ) & 0x10 ) != 0 ),CPU_STATE_S.AF);
+	
+	
+	//cpu->flags.bit.CF = ( ( dst & 0xff00) != 0 );
+	//cpu->flags.bit.OF = ( ( ( v1 ^ dst ) & ( v1 ^ v2 ) & 0x80 ) != 0 );
+	//cpu->flags.bit.AF = ( ( ( v1 ^ v2 ^ dst ) & 0x10 ) != 0 );
+	
+}
 
 
 

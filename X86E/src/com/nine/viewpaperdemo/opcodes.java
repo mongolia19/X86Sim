@@ -101,6 +101,8 @@ public static int op86_opcodes(int opcode, CPU_STATE_S cpu)
 		return res;
 	}
 
+
+//OR reg8, rm8
 private static int op0a(CPU_STATE_S cpu) {
 	int src1, src2, dst;
 	cpu.cnt |= BCNT_1;
@@ -112,6 +114,78 @@ private static int op0a(CPU_STATE_S cpu) {
 	//printf( "OR %s, %s\n", byteRegName[ cpu->modrm.bit.rm ], byteRegName[ cpu->modrm.bit.reg ] );
 	return cpu.cnt;
 }
+
+//SBB rm16, reg16
+static int op19( CPU_STATE_S cpu )
+{
+	int src1, src2, src3, dst;
+	cpu.cnt |= BCNT_1; // modrm
+	src1 = get_ea_val_16( cpu );
+	src2 = get_reg_val_16( cpu, cpu.modrm(CPU_STATE_S.GetBit,CPU_STATE_S. reg ));
+	src3 = cpu.get_flag_bit(CPU_STATE_S.CF);// bit.CF;
+	dst = src1 - src2 - src3;
+	set_ea_val_16( cpu, dst );
+	flags.set_flag_sbb_word( cpu, src1, src2, src3 );
+	//printf( "SBB rm16, reg16\n");
+	return cpu.cnt;
+}
+
+
+//AND 	rm8, reg8
+static int op20( CPU_STATE_S cpu )
+{
+	int src1, src2, dst;
+	cpu.cnt |= BCNT_1; // modrm
+	src1 = get_ea_val_8(cpu);
+	src2 = get_reg_val_8(cpu, cpu.modrm(CPU_STATE_S.GetBit, CPU_STATE_S.reg));
+	dst = src1 & src2;
+	set_ea_val_8(cpu, dst);
+	flags.set_flag_log_byte( cpu, dst );
+	//printf("AND %s, %s\n", byteRegName[ cpu->modrm.bit.reg ], "???" );
+	return cpu.cnt;
+}
+
+//AND rm16, reg16
+static int op21( CPU_STATE_S cpu )
+{
+	int src1, src2, dst;
+	cpu.cnt |= BCNT_1; // modrm
+	src1 = get_ea_val_16(cpu);
+	src2 = get_reg_val_16(cpu, cpu.modrm(CPU_STATE_S.GetBit, CPU_STATE_S.reg));
+	dst = src1 & src2;
+	set_ea_val_16(cpu, dst);
+	flags.set_flag_log_word(cpu, dst );
+	//printf("AND %s, %s\n", wordRegName[ cpu->modrm.bit.reg ], "???" );
+	return cpu.cnt;
+}
+
+//SUB 	rm16, reg16
+static int op29( CPU_STATE_S cpu )
+{
+	int src1, src2, dst;
+	cpu.cnt |= BCNT_1; // modrm
+	src1 = get_ea_val_16(cpu);
+	src2 = get_reg_val_16(cpu, cpu.modrm(CPU_STATE_S.GetBit, CPU_STATE_S.reg));
+	dst = src1 - src2;
+	set_ea_val_16( cpu, dst );
+	flags.set_flag_sub_word( cpu, src1, src2 );
+	//printf( "SUB %s %s\n", wordRegName[ cpu->modrm.bit.reg ], "???" );
+	return cpu.cnt;
+}
+
+//SUB 	AL, data8
+static int op2c( CPU_STATE_S cpu )
+{
+	int val = cpu.mp.mp[1];
+	int AL = get_reg_val_8( cpu, REG_AL );
+	cpu.cnt |= BCNT_1; // src2
+	set_reg_val_8(cpu, REG_AL, AL - val);
+	flags. set_flag_sub_byte(cpu, AL, val);
+	//printf( "ADD AL, 0x%02x\n", val );
+	return cpu.cnt;
+}
+//TODO 2c finished
+///
 
 private static void set_ea_val_8(CPU_STATE_S cpu, int val) {
 	// TODO Auto-generated method stub
@@ -279,6 +353,8 @@ private static int op09(CPU_STATE_S cpu) {
 	//printf( "OR %s, %s\n", wordRegName[ cpu->modrm.bit.reg ], wordRegName[ cpu->modrm.bit.rm ] );
 	return cpu.cnt;
 }
+
+
 
 private static int opxx(CPU_STATE_S cpu) {
 	// TODO Auto-generated method stub

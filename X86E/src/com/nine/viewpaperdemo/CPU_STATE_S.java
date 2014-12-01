@@ -60,6 +60,11 @@ public class CPU_STATE_S
 		
 		
 	}
+	
+	public int get_flag_bit(int Bit_N)///count from zero bit
+	{
+		return ((this.flags&(1<<Bit_N))>>Bit_N);
+	}
 	// 16-bit segment registers
 	int CS; // code segment (Holds the Code segment in which your program runs. Changing its value might make the computer hang.)
 	int DS; // data segment (Holds the Data segment that your program accesses. Changing its value might give erroneous data.)
