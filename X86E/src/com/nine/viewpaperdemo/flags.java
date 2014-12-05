@@ -110,6 +110,23 @@ public static void set_flag_sub_byte(CPU_STATE_S cpu, int v1, int v2) {
 	//cpu->flags.bit.AF = ( ( ( v1 ^ v2 ^ dst ) & 0x10 ) != 0 );
 	
 }
+public static void set_flag_adc_word(CPU_STATE_S cpu, int v1, int v2,
+		int v3) 
+{
+	int dst = v1 + v2 + v3;
+	
+	set_psz_flags_word( cpu, v1 + v2 + v3 );
+	
+	cpu.flags(( ( dst & 0xffff0000 ) != 0 ),CPU_STATE_S.CF);
+	cpu.flags(( ( ( dst ^ v1 ) & ( dst ^ v2 ) & 0x8000 ) != 0 ),CPU_STATE_S.OF);
+	cpu.flags( (  ( ( v1 ^ v2 ^ dst ) & 0x10 ) != 0),CPU_STATE_S.AF);
+	
+	
+	//cpu->flags.bit.CF = ( ( dst & 0xffff0000 ) != 0 );
+	//cpu->flags.bit.OF = ( ( dst ^ v1 ) & ( dst ^ v2 ) & 0x8000 ) != 0;
+	//cpu->flags.bit.AF = ( ( v1 ^ v2 ^ dst ) & 0x10 ) != 0;
+	
+}
 
 
 

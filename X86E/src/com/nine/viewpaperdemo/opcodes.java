@@ -351,10 +351,11 @@ static int op77( CPU_STATE_S cpu )
 	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[1] );
 	cpu.cnt |= BCNT_1;
 	//printf("JA 0x%02x\n", mem);
-	if( !( cpu.flags.bit.CF || cpu.flags.bit.ZF ) )
+	//cpu.get_flag_bit(CPU_STATE_S.CF)
+	if( !( cpu.get_flag_bit(CPU_STATE_S.CF)>0 ||cpu.get_flag_bit(CPU_STATE_S.ZF)>0 ) )
 	{
 		cpu.IP = mem;
-		cpu.mp = &cpu.memory[ mem ];
+		cpu.mp.mp[mem] = cpu.memory.mem[ mem ];
 		return 0; // jump
 	}
 	return cpu.cnt; // no jump
@@ -366,7 +367,8 @@ static int op79( CPU_STATE_S cpu )
 	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[1] );
 	cpu.cnt |= BCNT_1;
 	//printf("JNS 0x%02x\n", mem);
-	if( !cpu.flags.bit.SF )
+	//(cpu.get_flag_bit(CPU_STATE_S.SF)>0)
+	if( !(cpu.get_flag_bit(CPU_STATE_S.SF)>0) )
 	{
 		cpu.IP = mem;
 		cpu.mp.mp[mem] = cpu.memory.mem[ mem ];///Here maybe a problem
@@ -396,7 +398,7 @@ static int op80( CPU_STATE_S cpu )
 		default:
 			//printf("reg = %x\n", cpu.modrm(CPU_STATE_S.GetBit, CPU_STATE_S.reg) );
 			return UNHANDLED_OPCODE;
-		break;
+		
 	}
 	return cpu.cnt;
 }
@@ -420,7 +422,7 @@ static int op81( CPU_STATE_S cpu )
 		default:
 			//printf("reg = %x\n", cpu.modrm(CPU_STATE_S.GetBit, CPU_STATE_S.reg) );
 			return UNHANDLED_OPCODE;
-		break;
+		
 	}
 	return cpu.cnt;
 }
@@ -456,18 +458,19 @@ static int op83( CPU_STATE_S cpu )
 			
 		case 0x1: // OR rm16, imm8
 			return UNHANDLED_OPCODE;
-			break;
+		
 			
 		case 0x2: // ADC rm16, imm8
 			//printf("ADC %s(0x%04x) %xh\n", wordRegName[cpu.modrm.bit.rm], src1, src2);
-			dst = src1 +  src2 + cpu.flags.bit.CF;
+			//cpu.get_flag_bit(CPU_STATE_S.CF)
+			dst = src1 +  src2 + cpu.get_flag_bit(CPU_STATE_S.CF);
 			set_ea_val_16( cpu, dst );
-			set_flag_adc_word( cpu, src1, src2, cpu.flags.bit.CF );
+			flags.set_flag_adc_word( cpu, src1, src2,  cpu.get_flag_bit(CPU_STATE_S.CF));
 			break;
 			
 		case 0x3: // SBB rm16, imm8
 			return UNHANDLED_OPCODE;
-			break;
+			
 			
 		case 0x4: // AND rm16, imm8 
 			//printf("AND %s(0x%04x) %xh\n", wordRegName[cpu.modrm.bit.rm], src1, src2);
@@ -584,7 +587,7 @@ static int opb0( CPU_STATE_S cpu )
 	int val = cpu.mp.mp[1];
 	cpu.cnt |= BCNT_1;
 	set_reg_val_8(cpu, rm, val);
-	printf("MOV %s, $%x\n", byteRegName[rm], val);
+	//printf("MOV %s, $%x\n", byteRegName[rm], val);
 	return cpu.cnt;
 }
 
@@ -606,7 +609,7 @@ static int opc3( CPU_STATE_S cpu )
 	int addr =cpu8086.cpu_pop( cpu );
 	//printf( "RETN\n");
 	cpu.IP = addr;
-	cpu.mp = &cpu.memory[ addr ];
+	cpu.mp.mp[addr] = cpu.memory.mem[ addr ];
 	return 0;
 }
 
@@ -635,7 +638,7 @@ static int opc7( CPU_STATE_S cpu )
 //various Ev CL
 static int opd3( CPU_STATE_S cpu )
 {
-	int src, dst;
+	int src, dst=0;
 	int cl = get_reg_val_8(cpu, REG_CL );
 	cpu.cnt |= BCNT_1; // modrm
 	src = get_ea_val_16(cpu);
@@ -646,29 +649,31 @@ static int opd3( CPU_STATE_S cpu )
 	{
 		case 0x0: // ROL
 			dst = ( src << ( cl & 15 ) ) | ( src >> ( 16 - ( cl & 15 ) ) );
-			cpu.flags.bit.CF  = ( ( dst & 1 ) != 0 );
+			cpu.flags(( ( dst & 1 ) != 0 ),CPU_STATE_S.CF);
+			//cpu.flags.bit.CF  = ( ( dst & 1 ) != 0 );
 			break;
 		case 0x1: // ROR
 			return UNHANDLED_OPCODE;
-			break;
+			
 		case 0x2: // RCL
 			return UNHANDLED_OPCODE;
-			break;
+			
 		case 0x3: // RCR
 			return UNHANDLED_OPCODE;
-			break;
+			
 		case 0x4: // SHL
 		case 0x6: // alias
 			return UNHANDLED_OPCODE;
-			break;
+			
 		case 0x5: // SHR
 			return UNHANDLED_OPCODE;
-			break;
+			
 		case 0x7: // SAR
 			return UNHANDLED_OPCODE;
-			break;
+			
 	}
-	cpu.flags.bit.OF = ( ( ( dst ^ src) & 0x8000 ) != 0 );
+	cpu.flags(( ( ( dst ^ src) & 0x8000 ) != 0 ),CPU_STATE_S.OF);
+	//cpu.flags.bit.OF = ( ( ( dst ^ src) & 0x8000 ) != 0 );
 	set_ea_val_16(cpu, (int)dst);
 	return cpu.cnt;
 }
@@ -678,10 +683,11 @@ static int ope0( CPU_STATE_S cpu )
 {
 	cpu.cnt |= BCNT_1;
 	cpu.CX -= 1;
-	if( cpu.CX != 0 && !cpu.flags.bit.ZF )
+	//cpu.get_flag_bit(CPU_STATE_S.ZF)
+	if( cpu.CX != 0 && !(cpu.get_flag_bit(CPU_STATE_S.ZF)>0) )
 	{
 		cpu.IP = ADD_S8(cpu.IP, cpu.mp.mp[1] + 2);
-		cpu.mp.mp = cpu.memory.mem[ cpu.IP ];
+		cpu.mp.mp[cpu.IP] = cpu.memory.mem[ cpu.IP ];
 		return 0;
 	}
 	return cpu.cnt;
@@ -694,7 +700,7 @@ static int ope8( CPU_STATE_S cpu )
 	cpu.cnt |= BCNT_1 | BCNT_2;
 	cpu8086.cpu_push( cpu, cpu.IP + 3 );
 	cpu.IP += 3 + mem;
-	cpu.mp = &cpu.memory[ cpu.IP ];
+	cpu.mp.mp[cpu.IP] = cpu.memory.mem[ cpu.IP ];
 	//printf( "CALL %xh\n", cpu.IP  );
 	// push the current address(well the next location to execute when the stack is popped) to the stack
 	// then set the IP to the new location in memory at imm16
@@ -705,7 +711,7 @@ static int ope8( CPU_STATE_S cpu )
 static int opeb( CPU_STATE_S cpu )
 {
 	cpu.IP = ADD_S8( cpu.IP, cpu.mp.mp[1] + 2 );
-	cpu.mp = &cpu.memory[ cpu.IP ];
+	cpu.mp .mp[ cpu.IP ]= cpu.memory.mem[ cpu.IP ];
 	cpu.cnt |= BCNT_1;
 	//printf( "JMP %xh\n", cpu.IP );
 	return 0;
@@ -752,10 +758,10 @@ static int opf7( CPU_STATE_S cpu )
 			{
 				//printf("DIVIDE ERROR\n");
 			}
-			sign1 = ( ( src1 & 0x80000000 ) != 0 );
-			sign2 = ( ( src2 & 0x80000000 ) != 0 );
-			dst1 = (int16_t)src1 / (int16_t)src2;
-			dst2 = (int16_t)src1 % (int16_t)src2;
+			sign1 = ( ( src1 & 0x80000000 ) != 0 )?1:0;
+			sign2 = ( ( src2 & 0x80000000 ) != 0 )?1:0;
+			dst1 = (int)src1 / (int)src2;
+			dst2 = (int)src1 % (int)src2;
 			if( sign1 != sign2 )
 			{
 				if( dst1 > 0x8000 )
@@ -770,16 +776,16 @@ static int opf7( CPU_STATE_S cpu )
 				{
 					//printf("DIVIDE ERROR\n");					
 				}
-				if( sign1 )
+				if( sign1 >0)
 				{
-					dst2 = (int16_t)(( ~dst2 + 1 ) & 0xffff);
+					dst2 = (( ~dst2 + 1 ) & 0xffff);
 				}
 			}
 			cpu.AX = (int)dst1;
 			cpu.DX = (int)dst2;
 			return cpu.cnt;
 		}	
-			break;
+			
 	}
 	return UNHANDLED_OPCODE;
 }
@@ -815,7 +821,8 @@ static int opfe( CPU_STATE_S cpu )
 			
 			cf = cpu.get_flag_bit(CPU_STATE_S.CF);
 			flags.set_flag_add_byte(cpu, src, 1);
-			cpu.flags.bit.CF = ( cf != 0 );
+			cpu.flags( ( cf != 0 ),CPU_STATE_S.CF);
+			//cpu.flags.bit.CF = ( cf != 0 );
 			break;
 			
 		case 0x1: // DEC rm8
@@ -823,12 +830,13 @@ static int opfe( CPU_STATE_S cpu )
 			// don't modify CF 
 			cf = cpu.get_flag_bit(CPU_STATE_S.CF);
 			flags.set_flag_sub_byte(cpu, src, 1);
-			cpu.flags.bit.CF = ( cf != 0 );		
+			cpu.flags( ( cf != 0 ),CPU_STATE_S.CF);
+			//cpu.flags.bit.CF = ( cf != 0 );		
 			break;
 			
 		default:
 			return UNHANDLED_OPCODE;
-			break;
+		
 	}
 	return cpu.cnt;
 }
@@ -1167,13 +1175,13 @@ private static void set_reg_val_16(CPU_STATE_S cpu, int reg, int val) {
 		}
 }
 
-private static int LO8(int w) {
+public static int LO8(int w) {
 	// TODO Auto-generated method stub
 	return		((w)&0xFF);
 	
 }
 
-private static int HI8(int w) {
+public static int HI8(int w) {
 	// TODO Auto-generated method stub
 	
 	return ((w >> 8) & 0xFF);
