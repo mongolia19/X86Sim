@@ -85,12 +85,133 @@ public static int op86_opcodes(int opcode, CPU_STATE_S cpu)
 				res=op04(cpu);
 			break;
 		case 0x09:
-			res=op09(cpu);
-		break;
+				res=op09(cpu);
+			break;
 		case 0x0a:
-			res=op0a(cpu);
+				res=op0a(cpu);
+			break;
+		case 0x19:
+			res=op19(cpu);
 		break;
-		
+		case 0x20:
+			res=op20(cpu);
+		break;
+		case 0x21:
+			res=op21(cpu);
+		break;
+		case 0x29:
+			res=op29(cpu);
+		break;
+		case 0x2c:
+			res=op2c(cpu);
+		break;
+		case 0x31:
+			res=op31(cpu);
+		break;
+		case 0x39:
+			res=op39(cpu);
+		break;
+		case 0x3c:
+			res=op3c(cpu);
+		break;
+		case 0x40:
+			res=op40(cpu);
+		break;
+		case 0x48:
+			res=op48(cpu);
+		case 0x50:
+			res=op50(cpu);
+		break;
+		case 0x58:
+			res=op58(cpu);
+		break;
+		case 0x72:
+			res=op72(cpu);
+		break;
+		case 0x74:
+			res=op74(cpu);
+		break;
+		case 0x75:
+			res=op75(cpu);
+		break;
+		case 0x76:
+			res=op76(cpu);
+		break;
+		case 0x77:
+			res=op77(cpu);
+		break;
+		case 0x79:
+			res=op80(cpu);
+		break;
+		case 0x81:
+			res=op81(cpu);
+		break;
+		case 0x83:
+			res=op83(cpu);
+		break;
+		case 0x86:
+			res=op86(cpu);
+		break;
+		case 0x87:
+			res=op87(cpu);
+		break;
+		case 0x88:
+			res=op88(cpu);
+		break;
+		case 0x89:
+			res=op89(cpu);
+		break;
+		case 0x8a:
+			res=op8a(cpu);
+		break;
+		case 0x8b:
+			res=op8b(cpu);
+		break;
+		case 0x90:
+			res=op90(cpu);
+		break;
+		case 0xb0:
+			res=opb0(cpu);
+		break;
+		case 0xb8:
+			res=opb8(cpu);
+		break;
+		case 0xc3:
+			res=opc3(cpu);
+		break;
+		case 0xc4:
+			res=opc4(cpu);
+		break;
+		case 0xc7:
+			res=opc7(cpu);
+		break;
+		case 0xd3:
+			res=opd3(cpu);
+		break;
+		case 0xe0:
+			res=op87(cpu);
+		break;
+		case 0xe8:
+			res=ope8(cpu);
+		break;
+		case 0xeb:
+			res=opeb(cpu);
+		break;
+		case 0xf4:
+			res=opf4(cpu);
+		break;
+		case 0xf7:
+			res=opf7(cpu);
+		break;
+		case 0xf8:
+			res=opf8(cpu);
+		break;
+		case 0xf9:
+			res=opf9(cpu);
+		break;
+		case 0xfe:
+			res=opfe(cpu);
+		break;
 		default:
 				res=opxx(cpu);
 			break;
