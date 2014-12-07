@@ -41,6 +41,11 @@ public class GuideActivity extends Activity implements OnTouchListener{
     		initViewPager();
     		initDots();
       
+    		//Cpu segment
+    		
+    		CPU_STATE_S cpu86=new CPU_STATE_S();
+    		retro86.startCPU(cpu86);
+    		
 		
     }
     

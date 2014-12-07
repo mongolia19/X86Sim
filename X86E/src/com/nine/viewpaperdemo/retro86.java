@@ -2,7 +2,7 @@ package com.nine.viewpaperdemo;
 
 public class retro86 {
 	
-	public static int AsmCode[]={0x81,0xFC,0x00,0x01,0x74,0x01,0xF4,0xBC,0x00,0x10,0xB0,0x2E,0xBB,0x00,0x00,0x4B,
+	public static int AsmCode[]={0x81,0xFC,0x00,0x01,0x74,0x01,0xF4,0xB0,0x2E,0xBB,0x00,0x00,0x4B,
 		0x83,0xFB,0xFF,0x75,0xF1,0xE8,0x51,0x01,0x43,0x75,0xEB,0xE8,0x4B,0x01,0x31,0xC9,
 		0x09,0xCB,0x75,0xE2,0x72,0xE0,0xE8,0x40,0x01,0xB9,0x00,0x80,0x39,0xD9,0x76,0xD6,
 		0xE8,0x36,0x01,0x01,0xCB,0x72,0xCF,0xE8,0x2F,0x01,0x01,0xDB,0x83,0xD1,0x00,0x79,
@@ -51,7 +51,7 @@ public class retro86 {
 	// load the file into emulator memory
 	
 	cpu.memory.mem=AsmCode;
-	
+	cpu.mp.mp=cpu.memory.mem;
 	
 		disasm( cpu );
 
@@ -76,7 +76,8 @@ public class retro86 {
 			}
 
 			cpu.IP += count;
-			cpu.mp.mp[ cpu.IP ] = cpu.memory.mem[ cpu.IP ];
+			cpu.MPPointer=cpu.IP;
+			//cpu.mp = &cpu.memory.mem[ cpu.IP ];
 			
 			
 			print_cpu_state( cpu );
@@ -106,10 +107,11 @@ public class retro86 {
 	
 		int x, y;
 		// print out the screen
+		//Modified 
 		for( y = 0; y < 25; ++y )
 		{
-			for( x = 0; x < 80; ++x )
-				System.out.println(  cpu.memory.mem[ MEMOFFSET_VIDEO + ( y * 80 ) + x ] );
+			for( x = 0; x < 16; ++x )
+				System.out.println(  cpu.memory.mem[  + ( y * 16 ) + x ] );
 			System.out.println(  "\n" );
 		}
 		
@@ -124,7 +126,7 @@ public class retro86 {
 		System.out.println( "===============================================================\n");
 		for( i = 0; i < 6; ++i )
 		{
-			int c = cpu.mp.mp[i];
+			int c = cpu.mp.mp[cpu.MPPointer+i];
 			System.out.println( "0x%02x - "+c );
 			for( b = 0; b < 8; ++b )
 				System.out.println( (c >> (7-b)) & 1 );

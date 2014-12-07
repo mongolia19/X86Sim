@@ -39,12 +39,13 @@ public class CPU_STATE_S
 	// flags register
 	int IP; // Index Pointer. Holds the offset of the next instruction. It can only be read
 		
+	int MPPointer;//Used to simulate the pointer int * mp
 	
 	int flags;
 	public void flags(boolean SetOrNot,int bit)
 	{
 		int Mask=0;
-		if(SetOrNot)
+		if(!SetOrNot)
 		{
 			Mask=~(1<<bit);
 			this.flags&=Mask;
@@ -193,6 +194,13 @@ public class CPU_STATE_S
 		cpu = null;
 	}
 	
-	
+	public CPU_STATE_S ()
+	{
+		this.memory=new Memory();
+		this.mp=new MP();
+		
+		
+		
+	}
 	
 }

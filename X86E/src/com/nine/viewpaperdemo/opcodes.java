@@ -50,11 +50,11 @@ public static int  op_execute( CPU_STATE_S cpu )
 	{
 	
 		int bit_index, bit_counter;
-		int opcode = cpu.mp.mp[0];
+		int opcode = cpu.mp.mp[cpu.MPPointer+0];
 		int skip = 0;
 		int preIP = cpu.IP;
 		cpu.cnt = BCNT_OPCODE; // start off the count with the one byte opcode
-		cpu.modrm = cpu.mp.mp[1];
+		cpu.modrm = cpu.mp.mp[cpu.MPPointer+1];
 		bit_counter = op86_opcodes( opcode, cpu );
 		if( bit_counter == UNHANDLED_OPCODE )
 		{
@@ -297,7 +297,7 @@ static int op29( CPU_STATE_S cpu )
 //SUB 	AL, data8
 static int op2c( CPU_STATE_S cpu )
 {
-	int val = cpu.mp.mp[1];
+	int val = cpu.mp.mp[cpu.MPPointer+1];
 	int AL = get_reg_val_8( cpu, REG_AL );
 	cpu.cnt |= BCNT_1; // src2
 	set_reg_val_8(cpu, REG_AL, AL - val);
@@ -338,7 +338,7 @@ static int op3c( CPU_STATE_S cpu )
 {
 	int src1, src2;
 	src1 = get_reg_val_8(cpu, REG_AL);
-	src2 = cpu.mp.mp[1];
+	src2 = cpu.mp.mp[cpu.MPPointer+1];
 	cpu.cnt |= BCNT_1; // src2
 	flags.set_flag_sub_byte(cpu, src1, src2);
 	return cpu.cnt;
@@ -347,7 +347,7 @@ static int op3c( CPU_STATE_S cpu )
 //INC 	reg16
 static int op40( CPU_STATE_S cpu )
 {
-	int rm = MODRM_RM(cpu.mp.mp[0]);
+	int rm = MODRM_RM(cpu.mp.mp[cpu.MPPointer+0]);
 	int src = get_reg_val_16(cpu, rm);
 	set_reg_val_16( cpu, rm, src + 1 );
 	// we can't modify the CF flag
@@ -364,7 +364,7 @@ static int op40( CPU_STATE_S cpu )
 //DEC 	reg16
 static int op48( CPU_STATE_S cpu )
 {
-	int rm = MODRM_RM(cpu.mp.mp[0]);
+	int rm = MODRM_RM(cpu.mp.mp[cpu.MPPointer+0]);
 	int src = get_reg_val_16(cpu, rm);
 	set_reg_val_16( cpu, rm, src - 1 );
 	// we can't modify the CF flag
@@ -378,7 +378,7 @@ static int op48( CPU_STATE_S cpu )
 //PUSH
 static int op50( CPU_STATE_S cpu )
 {
-	int rm = MODRM_RM(cpu.mp.mp[0]);
+	int rm = MODRM_RM(cpu.mp.mp[cpu.MPPointer+0]);
 	//printf( "PUSH %s\n", wordRegName[rm] );	
 	if( rm == REG_SP /* && CPU_PUSH_FIRST?? */ )
 	{
@@ -395,7 +395,7 @@ static int op50( CPU_STATE_S cpu )
 //POP 
 static int op58( CPU_STATE_S cpu )
 {
-	int rm = MODRM_RM(cpu.mp.mp[0]);
+	int rm = MODRM_RM(cpu.mp.mp[cpu.MPPointer+0]);
 	int val = cpu8086.cpu_pop( cpu );
 	set_reg_val_16( cpu, rm, val );
 	//printf( "POP %s\n", wordRegName[rm] );	
@@ -405,13 +405,14 @@ static int op58( CPU_STATE_S cpu )
 //JB/JNAE/JC imm8
 static int op72( CPU_STATE_S cpu )
 {
-	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[1] );
+	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[cpu.MPPointer+1] );
 	cpu.cnt |= BCNT_1;
 	//printf("JC %xh\n", mem);
 	if( (cpu.get_flag_bit(CPU_STATE_S.CF)>0) )
 	{
 		cpu.IP = mem;
-		cpu.mp.mp[mem] = cpu.memory.mem[ mem ];
+		cpu.MPPointer=mem;
+		//cpu.mp = &cpu.memory.mem[ mem ];
 		return 0; // jump
 	}
 	return cpu.cnt; // no jump
@@ -422,14 +423,15 @@ static int op72( CPU_STATE_S cpu )
 //JZ/JE imm8
 static int op74( CPU_STATE_S cpu )
 {
-	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[1] );
+	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[cpu.MPPointer+1] );
 	cpu.cnt |= BCNT_1; // modrm
 	//printf("JZ %xh\n", mem);
 	
 	if(cpu.get_flag_bit(CPU_STATE_S.ZF)>0  )
 	{
 		cpu.IP = mem;
-		cpu.mp.mp [mem]= cpu.memory.mem[ mem ];
+		cpu.MPPointer=mem;
+		//cpu.mp= &cpu.memory.mem[ mem ];
 		return 0; // jump
 	}
 	return cpu.cnt; // no jump
@@ -438,13 +440,14 @@ static int op74( CPU_STATE_S cpu )
 //JNZ/JNE imm8
 static int op75( CPU_STATE_S cpu )
 {
-	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[1] );
+	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[cpu.MPPointer+1] );
 	cpu.cnt |= BCNT_1;
 	//printf("JNZ %xh\n", mem);
 	if( (cpu.get_flag_bit(CPU_STATE_S.ZF)==0) )
 	{
 		cpu.IP = mem;
-		cpu.mp.mp[mem] = cpu.memory.mem[ mem ];
+		cpu.MPPointer=mem;
+		//cpu.mp.mp[cpu.MPPointer+mem] = cpu.memory.mem[ mem ];
 		return 0; // jump
 	}
 	return cpu.cnt; // no jump	
@@ -453,14 +456,15 @@ static int op75( CPU_STATE_S cpu )
 //JBE/JNA imm8
 static int op76( CPU_STATE_S cpu )
 {
-	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[1] );
+	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[cpu.MPPointer+1] );
 	cpu.cnt |= BCNT_1;
 	//printf("JBE 0x%02x\n", mem);
 	
 	if(cpu.get_flag_bit(CPU_STATE_S.CF)>0 ||cpu.get_flag_bit(CPU_STATE_S.ZF)>0 )// cpu.flags.bit.CF || cpu.flags.bit.ZF )
 	{
 		cpu.IP = mem;
-		cpu.mp.mp[mem] = cpu.memory.mem[ mem ];
+		cpu.MPPointer=mem;
+		//cpu.mp = &cpu.memory.mem[ mem ];
 		return 0; // jump
 	}
 	return cpu.cnt; // no jump
@@ -469,14 +473,15 @@ static int op76( CPU_STATE_S cpu )
 //JA imm8
 static int op77( CPU_STATE_S cpu )
 {
-	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[1] );
+	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[cpu.MPPointer+1] );
 	cpu.cnt |= BCNT_1;
 	//printf("JA 0x%02x\n", mem);
 	//cpu.get_flag_bit(CPU_STATE_S.CF)
 	if( !( cpu.get_flag_bit(CPU_STATE_S.CF)>0 ||cpu.get_flag_bit(CPU_STATE_S.ZF)>0 ) )
 	{
 		cpu.IP = mem;
-		cpu.mp.mp[mem] = cpu.memory.mem[ mem ];
+		cpu.MPPointer=mem;
+		//cpu.mp= &cpu.memory.mem[ mem ];
 		return 0; // jump
 	}
 	return cpu.cnt; // no jump
@@ -485,14 +490,15 @@ static int op77( CPU_STATE_S cpu )
 //JNS imm8
 static int op79( CPU_STATE_S cpu )
 {
-	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[1] );
+	int mem = ADD_S8( cpu.IP + 2, cpu.mp.mp[cpu.MPPointer+1] );
 	cpu.cnt |= BCNT_1;
 	//printf("JNS 0x%02x\n", mem);
 	//(cpu.get_flag_bit(CPU_STATE_S.SF)>0)
 	if( !(cpu.get_flag_bit(CPU_STATE_S.SF)>0) )
 	{
 		cpu.IP = mem;
-		cpu.mp.mp[mem] = cpu.memory.mem[ mem ];///Here maybe a problem
+		cpu.MPPointer=mem;
+		//cpu.mp.mp[mem] = cpu.memory.mem[ mem ];///Here maybe a problem
 		return 0; // jump
 	}
 	return cpu.cnt; // no jump
@@ -508,7 +514,7 @@ static int op80( CPU_STATE_S cpu )
 		case 0x1: // OR rm8, imm8
 			src1 = get_ea_val_8(cpu);
 			offset = bit_count( cpu.cnt );
-			src2 = cpu.mp.mp[offset];
+			src2 = cpu.mp.mp[cpu.MPPointer+offset];
 			cpu.cnt |= (1<<(offset));
 			dst = src1 | src2;
 			set_ea_val_8( cpu, dst);
@@ -531,7 +537,7 @@ static int op81( CPU_STATE_S cpu )
 	cpu.cnt |= BCNT_1;
 	src1 = get_ea_val_16( cpu );
 	offset = bit_count( cpu.cnt );
-	src2 = MAKE16( cpu.mp.mp[offset+1], cpu.mp.mp[offset] );;
+	src2 = MAKE16( cpu.mp.mp[cpu.MPPointer+offset+1], cpu.mp.mp[cpu.MPPointer+offset] );;
 	cpu.cnt |= (1<<(offset)) | (1<<(offset+1));
 	switch( cpu.modrm(CPU_STATE_S.GetBit, CPU_STATE_S.reg) )
 	{
@@ -565,7 +571,7 @@ static int op83( CPU_STATE_S cpu )
 	cpu.cnt |= BCNT_1; // modrm
 	src1 = get_ea_val_16(cpu);
 	offset = bit_count( cpu.cnt );
-	src2 = MAKE_S16( cpu.mp.mp[offset] );
+	src2 = MAKE_S16( cpu.mp.mp[cpu.MPPointer+offset] );
 	cpu.cnt |= (1<<(offset));
 	
 	switch( cpu.modrm(CPU_STATE_S.GetBit, CPU_STATE_S.reg) ) 
@@ -661,7 +667,7 @@ static int op88( CPU_STATE_S cpu )
 static int op89( CPU_STATE_S cpu )
 {
 	int val = get_reg_val_16( cpu, cpu.modrm(CPU_STATE_S.GetBit, CPU_STATE_S.reg) );
-	int addr = MAKE16( cpu.mp.mp[3], cpu.mp.mp[2] );
+	int addr = MAKE16( cpu.mp.mp[cpu.MPPointer+3], cpu.mp.mp[cpu.MPPointer+2] );
 	cpu.cnt |= BCNT_1;
 	//printf("MOV [%xh] %s(0x%x)\n", addr, wordRegName[ cpu.modrm(CPU_STATE_S.GetBit, CPU_STATE_S.reg) ], val);
 	set_ea_val_16( cpu, val );
@@ -691,7 +697,7 @@ static int op8b( CPU_STATE_S cpu )
 //XCHG AX, reg16
 static int op90( CPU_STATE_S cpu )
 {
-	int rm = MODRM_RM(cpu.mp.mp[0]);
+	int rm = MODRM_RM(cpu.mp.mp[cpu.MPPointer+0]);
 	int val = cpu.AX;
 	val = cpu.AX;
 	cpu.AX = get_reg_val_16( cpu, rm );
@@ -704,8 +710,8 @@ static int op90( CPU_STATE_S cpu )
 //MOV reg8, imm8
 static int opb0( CPU_STATE_S cpu )
 {
-	int rm = MODRM_RM( cpu.mp.mp[0] );
-	int val = cpu.mp.mp[1];
+	int rm = MODRM_RM( cpu.mp.mp[cpu.MPPointer+0] );
+	int val = cpu.mp.mp[cpu.MPPointer+1];
 	cpu.cnt |= BCNT_1;
 	set_reg_val_8(cpu, rm, val);
 	//printf("MOV %s, $%x\n", byteRegName[rm], val);
@@ -716,8 +722,8 @@ static int opb0( CPU_STATE_S cpu )
 //MOV reg16, imm16
 static int opb8( CPU_STATE_S cpu )
 {
-	int rm = MODRM_RM( cpu.mp.mp[0] );
-	int val =  MAKE16( cpu.mp.mp[2], cpu.mp.mp[1] );
+	int rm = MODRM_RM( cpu.mp.mp[cpu.MPPointer+0] );
+	int val =  MAKE16( cpu.mp.mp[cpu.MPPointer+2], cpu.mp.mp[cpu.MPPointer+1] );
 	cpu.cnt |= BCNT_1 | BCNT_2;
 	set_reg_val_16(cpu, rm, val);
 	//printf("MOV %s, $%x\n", wordRegName[rm], val);
@@ -730,7 +736,8 @@ static int opc3( CPU_STATE_S cpu )
 	int addr =cpu8086.cpu_pop( cpu );
 	//printf( "RETN\n");
 	cpu.IP = addr;
-	cpu.mp.mp[addr] = cpu.memory.mem[ addr ];
+	cpu.MPPointer=addr;
+	//cpu.mp = &cpu.memory.mem[ addr ];
 	return 0;
 }
 
@@ -739,8 +746,8 @@ static int opc4( CPU_STATE_S cpu )
 {
 	int val1, val2;
 	cpu.cnt |= BCNT_1 | BCNT_2 | BCNT_3 | BCNT_4 | BCNT_5;
-	val1 = MAKE16( cpu.mp.mp[3], cpu.mp.mp[2] );
-	val2 = MAKE16( cpu.mp.mp[5], cpu.mp.mp[4] );
+	val1 = MAKE16( cpu.mp.mp[cpu.MPPointer+3], cpu.mp.mp[cpu.MPPointer+2] );
+	val2 = MAKE16( cpu.mp.mp[cpu.MPPointer+5], cpu.mp.mp[cpu.MPPointer+4] );
 	set_reg_val_16(cpu, cpu.modrm(CPU_STATE_S.GetBit, CPU_STATE_S.reg), val1);
 	cpu.ES = val2;
 	return cpu.cnt;
@@ -750,7 +757,7 @@ static int opc4( CPU_STATE_S cpu )
 static int opc7( CPU_STATE_S cpu )
 {
 	// @TODO: set the offsets based on modrm displacements instead of hard coding the 5,4 indexes here
-	int val = MAKE16( cpu.mp.mp[5], cpu.mp.mp[4] );
+	int val = MAKE16( cpu.mp.mp[cpu.MPPointer+5], cpu.mp.mp[cpu.MPPointer+4] );
 	cpu.cnt |= BCNT_1 | BCNT_4 | BCNT_5 ;
 	set_ea_val_16(cpu, val);
 	return cpu.cnt;
@@ -807,8 +814,9 @@ static int ope0( CPU_STATE_S cpu )
 	//cpu.get_flag_bit(CPU_STATE_S.ZF)
 	if( cpu.CX != 0 && !(cpu.get_flag_bit(CPU_STATE_S.ZF)>0) )
 	{
-		cpu.IP = ADD_S8(cpu.IP, cpu.mp.mp[1] + 2);
-		cpu.mp.mp[cpu.IP] = cpu.memory.mem[ cpu.IP ];
+		cpu.IP = ADD_S8(cpu.IP, cpu.mp.mp[cpu.MPPointer+1] + 2);
+		cpu.MPPointer=cpu.IP;
+		//cpu.mp= &cpu.memory.mem[ cpu.IP ];
 		return 0;
 	}
 	return cpu.cnt;
@@ -817,11 +825,12 @@ static int ope0( CPU_STATE_S cpu )
 //CALL imm16
 static int ope8( CPU_STATE_S cpu )
 {
-	int mem =  MAKE16( cpu.mp.mp[2], cpu.mp.mp[1] );
+	int mem =  MAKE16( cpu.mp.mp[cpu.MPPointer+2], cpu.mp.mp[cpu.MPPointer+1] );
 	cpu.cnt |= BCNT_1 | BCNT_2;
 	cpu8086.cpu_push( cpu, cpu.IP + 3 );
 	cpu.IP += 3 + mem;
-	cpu.mp.mp[cpu.IP] = cpu.memory.mem[ cpu.IP ];
+	cpu.MPPointer=cpu.IP;
+	//cpu.mp= &cpu.memory.mem[ cpu.IP ];
 	//printf( "CALL %xh\n", cpu.IP  );
 	// push the current address(well the next location to execute when the stack is popped) to the stack
 	// then set the IP to the new location in memory at imm16
@@ -831,8 +840,9 @@ static int ope8( CPU_STATE_S cpu )
 //JMP imm8
 static int opeb( CPU_STATE_S cpu )
 {
-	cpu.IP = ADD_S8( cpu.IP, cpu.mp.mp[1] + 2 );
-	cpu.mp .mp[ cpu.IP ]= cpu.memory.mem[ cpu.IP ];
+	cpu.IP = ADD_S8( cpu.IP, cpu.mp.mp[cpu.MPPointer+1] + 2 );
+	cpu.MPPointer=cpu.IP;
+	//cpu.mp = &cpu.memory.mem[ cpu.IP ];
 	cpu.cnt |= BCNT_1;
 	//printf( "JMP %xh\n", cpu.IP );
 	return 0;
@@ -963,8 +973,8 @@ static int opfe( CPU_STATE_S cpu )
 }
 private static void set_ea_val_8(CPU_STATE_S cpu, int val) {
 
-	int disp16 = MAKE16( cpu.mp.mp[3], cpu.mp.mp[2] );
-	int disp8 = cpu.mp.mp[2];
+	int disp16 = MAKE16( cpu.mp.mp[cpu.MPPointer+3], cpu.mp.mp[cpu.MPPointer+2] );
+	int disp8 = cpu.mp.mp[cpu.MPPointer+2];
 	
 	switch( cpu.modrm(CPU_STATE_S.GetBit, CPU_STATE_S.mod))
 	{
@@ -1040,8 +1050,8 @@ private static void set_ea_val_8(CPU_STATE_S cpu, int val) {
 
 static int get_ea_val_8( CPU_STATE_S cpu )
 {
-	int disp16 = MAKE16( cpu.mp.mp[3], cpu.mp.mp[2] );
-	int disp8 = cpu.mp.mp[2];
+	int disp16 = MAKE16( cpu.mp.mp[cpu.MPPointer+3], cpu.mp.mp[cpu.MPPointer+2] );
+	int disp8 = cpu.mp.mp[cpu.MPPointer+2];
 	
 	switch( cpu.modrm(CPU_STATE_S.GetBit,CPU_STATE_S.mod) )
 	{
@@ -1153,7 +1163,7 @@ private static int op01(CPU_STATE_S cpu) {
 //ADD 	AL, data8
 static int op04( CPU_STATE_S cpu )
 {
-	int val = cpu.mp.mp[1];
+	int val = cpu.mp.mp[cpu.MPPointer+1];
 	int AL = get_reg_val_8( cpu, REG_AL );
 	cpu.cnt |= BCNT_1;
 	//printf( "ADD AL, 0x%02x\n", val );
@@ -1203,8 +1213,8 @@ private static int get_reg_val_8(CPU_STATE_S cpu, int reg) {
 
 private static void set_ea_val_16(CPU_STATE_S cpu, int val) {
 	// TODO Auto-generated method stub
-	int disp16 = MAKE16( cpu.mp.mp[3], cpu.mp.mp[2] );
-	int disp8 = cpu.mp.mp[2];
+	int disp16 = MAKE16( cpu.mp.mp[cpu.MPPointer+3], cpu.mp.mp[cpu.MPPointer+2] );
+	int disp8 = cpu.mp.mp[cpu.MPPointer+2];
 
 	switch( cpu.modrm(CPU_STATE_S.GetBit,CPU_STATE_S.mod ))
 	{
@@ -1329,8 +1339,8 @@ private static int get_reg_val_16(CPU_STATE_S cpu, int reg) {
 
 private static int get_ea_val_16(CPU_STATE_S cpu) {
 	// TODO Auto-generated method stub
-	int disp16 = MAKE16( cpu.mp.mp[3], cpu.mp.mp[2] );
-	int disp8 = cpu.mp.mp[2];
+	int disp16 = MAKE16( cpu.mp.mp[cpu.MPPointer+3], cpu.mp.mp[cpu.MPPointer+2] );
+	int disp8 = cpu.mp.mp[cpu.MPPointer+2];
 
 	
 	
